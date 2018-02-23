@@ -28,3 +28,9 @@ hr{
   box-sizing:border-box;
   width:80%;  
 }
+
+.spinner {
+	float:right; 
+	margin: 0;
+	padding: 0;	
+  }

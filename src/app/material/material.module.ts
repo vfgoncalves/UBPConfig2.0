@@ -1,7 +1,7 @@
 import { DialogComponent } from './../dialog/dialog.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatInputModule, MatCheckboxModule, MatGridListModule, MatIconModule, MatCardModule, MatOptionModule, MatSelectModule, MatDialogModule, MatProgressBarModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatButtonModule, MatInputModule, MatCheckboxModule, MatGridListModule, MatIconModule, MatCardModule, MatOptionModule, MatSelectModule, MatDialogModule, MatProgressBarModule, MatProgressSpinnerModule, MatToolbarModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -16,7 +16,8 @@ import { MatButtonModule, MatInputModule, MatCheckboxModule, MatGridListModule, 
     MatSelectModule,
     MatDialogModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatToolbarModule
   ],
   exports: [
     MatButtonModule,
@@ -29,7 +30,8 @@ import { MatButtonModule, MatInputModule, MatCheckboxModule, MatGridListModule, 
     MatSelectModule,
     MatDialogModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatToolbarModule
   ],
   declarations: [
   ]

@@ -54,7 +54,7 @@ export class UserService extends BaseService {
       .valueChanges()
       .map((users: User[]) => {
         return users.length > 0;
-      }).catch(this.handleObservableError);
+      });
   }
 
   create(user: User, uuid: string): Promise<void> {

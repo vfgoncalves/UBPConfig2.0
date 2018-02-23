@@ -17,6 +17,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { UserService } from './services/user/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     SignUpComponent,
     SignInComponent,
     HomeComponent,
-    DialogComponent
+    DialogComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-
+<form (ngSubmit)="onSubmit(); $event.preventDefault()">
   <div class="main-div">
     <mat-card class="login-card z-depth center">
       <mat-card-header>
@@ -17,9 +17,18 @@
         </mat-form-field>
         <br/>
         <br/>
-        <button mat-raised-button color="primary" [disabled]="email.invalid || senha.invalid" >Logar</button>
+        <div>
+            <button mat-raised-button color="primary" [disabled]="(email.invalid || senha.invalid) || logando" >Logar</button>
+            <mat-spinner class="spinner" diameter="25" *ngIf="logando"></mat-spinner>
+        </div>        
+        <div>
+            <p *ngIf="errologin"><i class="material-icons">error</i>Ocorreu um erro ao logar, tente novamente!</p>
+        </div>
+
         <br/>
-        <br/>
+        <br/>       
+
+
         <hr class="centerlink" />
         <p class="centerlink">
           Não possui conta? Cadastre-se clicando
@@ -28,3 +37,4 @@
       </mat-card-content>
     </mat-card>
   </div>
+</form>

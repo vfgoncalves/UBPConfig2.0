@@ -7,6 +7,7 @@ import { UserService } from './../../services/user/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import * as firebase from 'firebase/app';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class SignInComponent implements OnInit {
   pwdPattern = "^(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z])(?=.*[A-Z]).{8,}$";
   usePattern = "^[-\w\.\$@\*\!]{8,30}$";
 
-  
+
   email = new FormControl('', [Validators.required, Validators.email]);
   nome = new FormControl('', [Validators.required]);
   usuario = new FormControl('', [Validators.required]);
@@ -29,7 +30,8 @@ export class SignInComponent implements OnInit {
   constructor(
     public userService: UserService,
     public authService: AuthService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -49,42 +51,32 @@ export class SignInComponent implements OnInit {
 
   getUsernameErrorMessage() {
     return this.usuario.hasError('required') ? 'Este campo é obrigatório' :
-        '';
+      '';
   }
 
   onSubmit(): void {
     this.salvando = true;
-    
-    // this.userService.userExists(this.usuario.value)
-    //   .first()
-    //   .subscribe((userExists: boolean) => {
-    //     //se o usuário não existir, cirar um usuário
-    //     if (!userExists) {
-    //       this.authService.createAuthUser({ email: this.email.value, password: this.senha.value })
-    //         .then((authUser: firebase.User) => {
-    //           let uuid: string = authUser.uid;
-    //           let user: User = new User(this.nome.value, this.usuario.value, this.email.value);
 
-    //           //Grava dados do usuário no banco
-    //           this.userService.create(user, uuid)
-    //             .then(() => {
-    //               //Usuário criado com sucesso
-    //             })
-    //             .catch((error: any) => {
-    //               this.openDialog(`Erro ao salvar os dados do usuário. Erro: ${error}`);
-    //             })
+    this.authService.createAuthUser({ email: this.email.value, password: this.senha.value })
+      .then((authUser: firebase.User) => {
+        let uuid: string = authUser.uid;
+        let user: User = new User(this.nome.value, this.usuario.value, this.email.value);
 
-    //         })
-    //         .catch((error: any) => {
-    //           this.openDialog(`Erro ao salvar os dados do usuário. Erro: ${error}`);
-    //         })
-    //     }
-    //     //se o usuário existir, retornar para o cliente
-    //     else {
-    //       //Enviar alerta
-    //       this.openDialog(`O username ${this.usuario.value} já está sendo usado em outra conta!`);
-    //     }
-    //   })
+        //Grava dados do usuário no banco
+        this.userService.create(user, uuid)
+          .then(() => {
+            //Usuário criado com sucesso
+            this.salvando = true;
+            this.router.navigateByUrl("/home")
+          })
+          .catch((error: any) => {
+            this.openDialog(`Erro ao salvar os dados do usuário. Erro: ${error}`);
+          })
+
+      })
+      .catch((error: any) => {
+        this.openDialog(`Erro ao salvar os dados do usuário. Erro: ${error}`);
+      })
   }
 
   openDialog(msgm: string): void {
