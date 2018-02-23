@@ -26,5 +26,6 @@ export class SignUpComponent implements OnInit {
     return this.senha.hasError('required') ? 'Este campo é obrigatório' :
             '';
   }
+  
 
 }

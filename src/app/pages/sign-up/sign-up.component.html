@@ -1,0 +1,30 @@
+
+  <div class="main-div">
+    <mat-card class="login-card z-depth center">
+      <mat-card-header>
+        <mat-card-title>UBPConfig 2.0 - Login</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+
+        <mat-form-field class="input">
+          <input matInput placeholder="E-mail" [formControl]="email" required>
+          <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <br/>
+        <mat-form-field class="input">
+          <input matInput placeholder="Senha" type="password" required [formControl]="senha">
+          <mat-error *ngIf="senha.invalid">{{getPasswordErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <br/>
+        <br/>
+        <button mat-raised-button color="primary" [disabled]="email.invalid || senha.invalid" >Logar</button>
+        <br/>
+        <br/>
+        <hr class="centerlink" />
+        <p class="centerlink">
+          Não possui conta? Cadastre-se clicando
+          <a routerLink="signin">Aqui</a>
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
