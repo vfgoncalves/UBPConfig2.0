@@ -13,6 +13,8 @@ import { User } from '../../model/user';
 export class UserService extends BaseService {
   users: Observable<User[]>;
   currentUser: AngularFireObject<User>;
+  userLogged: User;
+  uuid: string;  
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -29,8 +31,9 @@ export class UserService extends BaseService {
       .authState
       .subscribe((authUser: firebase.User) => {
         if (authUser) {
-          console.log('Auth state alterado!');
+          console.log('Auth state alterado!');          
           this.currentUser = this.db.object(`/users/${authUser.uid}`);
+          this.uuid = authUser.uid;        
           this.setUsers(authUser.uid);
         }
       });
@@ -61,6 +64,14 @@ export class UserService extends BaseService {
     return this.db.object(`/users/${uuid}`)
       .set(user)
       .catch(this.handlePromiseError);
+  }
+
+  get(userId: string): AngularFireObject<User> {
+    return this.db.object<User>(`/users/${userId}`);
+  }
+
+  getCurrentUser(): AngularFireObject<User>{
+    return this.get(this.uuid);
   }
 
 }

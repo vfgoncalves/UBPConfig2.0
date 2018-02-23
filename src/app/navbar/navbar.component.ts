@@ -1,7 +1,9 @@
+import { UserService } from './../services/user/user.service';
 import { Router } from '@angular/router';
 import { AuthService } from './../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-navbar',
@@ -9,23 +11,31 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+  user: User = null;
   constructor(
-    public authService: AuthService,
+    public authServ: AuthService,
+    public userServ: UserService,
     public router: Router
   ) { }
 
   ngOnInit() {
+    this.userServ.getCurrentUser()
+    .valueChanges()
+    .subscribe((user: User)=>{
+      console.log(user);
+      this.user = user;
+    })
+    
   }
 
-  onSignOut():void{
-    this.authService.singOut()
-    .then((user: firebase.User) => {
-      this.router.navigateByUrl("");
-    })
-    .catch((error :any) => {
-      console.log("erro : " + error);
-    });
+  onSignOut(): void {
+    this.authServ.singOut()
+      .then((user: firebase.User) => {
+        this.router.navigateByUrl("");
+      })
+      .catch((error: any) => {
+        console.log("erro : " + error);
+      });
   }
 
 }

@@ -24,15 +24,7 @@ export class SignUpComponent implements OnInit {
     public dialog: MatDialog
   ) { }
 
-  ngOnInit() {
-      this.authState = this.authService.getAuthState();
-      if (this.authState !== null){
-        this.authState.subscribe( (user) => {
-          if (user) {
-            this.router.navigateByUrl("/home")
-          }
-        })
-      }
+  ngOnInit() {      
   }
 
   getEmailErrorMessage() {
