@@ -35,7 +35,7 @@ export class CadastroEmpresaComponent implements OnInit {
 
   onSubmit(){
     this.salvando = true;
-    this.emp = new Empresa(this.sigla.value, this.nome.value, this.descricao.value);
+    this.emp = new Empresa(this.sigla.value, this.nome.value, this.descricao.value, null);
     this.empService.create(this.emp).then(() =>{
       this.salvando = false;
       this.sucesso = true;      

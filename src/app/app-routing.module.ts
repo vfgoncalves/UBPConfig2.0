@@ -1,3 +1,4 @@
+import { CadastroSistemaComponent } from './pages/cadastro-sistema/cadastro-sistema.component';
 import { CadastroEmpresaComponent } from './pages/cadastro-empresa/cadastro-empresa.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NgModule } from '@angular/core';
@@ -22,7 +23,11 @@ const routes: Routes = [
   {
     path: 'cadastro-empresa',
     component: CadastroEmpresaComponent
-  }  
+  },
+  {
+    path: 'cadastro-sistema',
+    component: CadastroSistemaComponent
+  }    
 ];
 
 @NgModule({

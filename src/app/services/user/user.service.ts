@@ -19,8 +19,6 @@ export class UserService extends BaseService {
   constructor(
     public afAuth: AngularFireAuth,
     public db: AngularFireDatabase,
-    public firebaseApp: FirebaseApp,
-    public http: Http
   ) {
     super();
     this.listenAuthState();

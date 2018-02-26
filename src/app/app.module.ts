@@ -1,3 +1,4 @@
+import { SistemaService } from './services/sistema/sistema.service';
 import { EmpresaService } from './services/empresa/empresa.service';
 import { Http, HttpModule } from '@angular/http';
 import { AuthService } from './services/auth/auth.service';
@@ -18,6 +19,7 @@ import { UserService } from './services/user/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CadastroEmpresaComponent } from './pages/cadastro-empresa/cadastro-empresa.component';
+import { CadastroSistemaComponent } from './pages/cadastro-sistema/cadastro-sistema.component';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { CadastroEmpresaComponent } from './pages/cadastro-empresa/cadastro-empr
     SignInComponent,
     HomeComponent,
     NavbarComponent,
-    CadastroEmpresaComponent
+    CadastroEmpresaComponent,
+    CadastroSistemaComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { CadastroEmpresaComponent } from './pages/cadastro-empresa/cadastro-empr
   providers: [
     AuthService,
     UserService,
-    EmpresaService
+    EmpresaService,
+    SistemaService
   ],
   bootstrap: [AppComponent]
 })

@@ -5,7 +5,8 @@ export class Empresa {
     constructor(
         public sigla: string,
         public nome: string,
-        public descricao: string
+        public descricao: string,
+        public id: string,
     ) {}
 
 }
