@@ -1,10 +1,8 @@
-import { MatDialog } from '@angular/material';
 import { AuthService } from './../../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
-import { DialogComponent } from '../../dialog/dialog.component';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,45 +10,51 @@ import { DialogComponent } from '../../dialog/dialog.component';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-  logando:boolean = false;
-  errologin:boolean = false;
+  logando: boolean = false;
+  errologin: boolean = false;
+  error: any;
   email = new FormControl('', [Validators.required, Validators.email]);
   senha = new FormControl('', [Validators.required]);
-  authState: any = null; 
+  authState: any = null;
 
   constructor(
     public authService: AuthService,
     public router: Router,
-    public dialog: MatDialog
   ) { }
 
-  ngOnInit() {      
+  ngOnInit() {
+  }
+
+  onSubmit(): void {
+    this.logando = true;
+    this.errologin = false;
+    
+    this.authService.signIn(this.email.value, this.senha.value)
+      .then((user: firebase.User) => {
+        //usuário autenticado
+        this.router.navigateByUrl("/home")
+        this.logando = false;
+        this.errologin = false;
+      })
+      .catch((error: any) => {
+        //erro na autenticação
+        this.error = error;
+        this.logando = false;
+        this.errologin = true;
+      })
   }
 
   getEmailErrorMessage() {
     return this.email.hasError('required') ? 'Este campo é obrigatório' :
-        this.email.hasError('email') ? 'O e-mail informado não é valido' :
-            '';
-  }
-  
-  getPasswordErrorMessage() {
-    return this.senha.hasError('required') ? 'Este campo é obrigatório' :
-            '';
+      this.email.hasError('email') ? 'O e-mail informado não é valido' :
+        '';
   }
 
-  onSubmit():void{
-    this.logando = true;
-    this.authService.signIn(this.email.value,this.senha.value)
-    .then((user: firebase.User) => {
-      //usuário autenticado
-      this.router.navigateByUrl("/home")
-      this.logando = false;
-      this.errologin = false;
-    })
-    .catch((error: any) => {
-      //erro na autenticação
-      this.logando = false;  
-      this.errologin = true;    
-    })
+  getFormControlClass(isValid: boolean, isPristine: boolean): {} {
+    return {
+      'form-control': true,
+      'is-invalid': !isValid && !isPristine,
+      'is-valid': isValid && !isPristine
+    };
   }
 }

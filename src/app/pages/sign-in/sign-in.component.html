@@ -1,46 +1,57 @@
 <form (ngSubmit)="onSubmit(); $event.preventDefault()">
-  <div class="main-div">
-    <mat-card class="login-card z-depth center">
-      <mat-card-header>
-        <mat-card-title>UBPConfig 2.0 - Cadastro</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
+  <div class="container center">
+    <div class="card">
+      <div class="card-body">
+        <!-- TÍTULO -->
+        <h5 class="card-title text-center"> UBPConfig 2.0 - Cadastro</h5>
 
-        <mat-form-field class="input">
-          <input matInput placeholder="E-mail" [formControl]="email" required>
-          <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
-        </mat-form-field>
-        <br/>
-        <mat-form-field class="input">
-          <input matInput placeholder="Nome Completo" [formControl]="nome" required>
-          <mat-error *ngIf="nome.invalid">Este campo deve ser preenchido!</mat-error>
-        </mat-form-field>
-        <br/>
-        <mat-form-field class="input">
-          <input matInput placeholder="Usuário" [formControl]="usuario" required>
-          <mat-error *ngIf="usuario.invalid">{{getUsernameErrorMessage()}}</mat-error>
-        </mat-form-field>
-        <br/>
-        <mat-form-field class="input">
-          <input matInput placeholder="Senha" type="password" required [formControl]="senha">
-          <mat-error *ngIf="senha.invalid">{{getPasswordErrorMessage()}}</mat-error>
-        </mat-form-field>
-        <br/>
-        <br/>
-        <div>
-          <button mat-raised-button color="primary" [disabled]="(email.invalid || nome.invalid || usuario.invalid || senha.invalid) || salvando">Cadastrar</button>
-          <mat-spinner class="spinner" diameter="25" *ngIf="salvando"></mat-spinner>
+        <!-- CAMPO E-MAIL -->
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input [ngClass]="getFormControlClass(email.valid, email.pristine)" id="email" type="email" placeholder="E-mail" [formControl]="email"
+            required>
+          <div class="invalid-feedback" [hidden]="email.valid || email.pristine">{{getEmailErrorMessage()}}</div>
         </div>
 
+        <!-- CAMPO NOME -->
+        <div class="form-group">
+          <label for="nome">Nome Completo</label>
+          <input [ngClass]="getFormControlClass(nome.valid, nome.pristine)" id="nome" type="text" placeholder="Nome Completo" [formControl]="nome"
+            required>
+          <div class="invalid-feedback" [hidden]="nome.valid || nome.pristine">Este campo deve ser preenchido!</div>
+        </div>
+
+        <!-- CAMPO USUÁRIO -->
+        <div class="form-group">
+          <label for="usuario">Usuário</label>
+          <input [ngClass]="getFormControlClass(usuario.valid, usuario.pristine)" id="usuario" type="text" placeholder="Usuário" [formControl]="usuario"
+            required>
+          <div class="invalid-feedback" [hidden]="usuario.valid || usuario.pristine">{{getUsernameErrorMessage()}}</div>
+        </div>
+
+        <!-- CAMPO SENHA -->
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input [ngClass]="getFormControlClass(senha.valid, senha.pristine)" id="senha" type="password" placeholder="Senha" [formControl]="senha"
+            required>
+          <div class="invalid-feedback" [hidden]="senha.valid || senha.pristine">{{getPasswordErrorMessage()}}</div>
+        </div>
+
+        <!-- BOTÃO SUBMIT -->
+        <button type="submit" class="btn btn-primary btn-block" [disabled]="(email.invalid || nome.invalid || usuario.invalid || senha.invalid) || salvando">Cadastrar
+          <i *ngIf="salvando" class="fa fa-circle-o-notch fa-spin" style="font-size:15px"></i>
+        </button>
         <br/>
-        <br/>
-        <br/>
-        <hr class="centerlink" />
-        <p class="centerlink">
+        <div class="alert alert-danger" role="alert" *ngIf="errorcadastro">
+          {{error}}
+        </div>
+
+
+        <p class="text-center">
           Já possui conta? Efetue o login clicando
           <a routerLink="">Aqui</a>
         </p>
-      </mat-card-content>
-    </mat-card>
+      </div>
+    </div>
   </div>
 </form>

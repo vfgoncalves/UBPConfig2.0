@@ -1,6 +1,4 @@
-import { MatDialog } from '@angular/material';
 import { AuthService } from './../../services/auth/auth.service';
-import { DialogComponent } from './../../dialog/dialog.component';
 import { User } from './../../model/user';
 import { UserService } from './../../services/user/user.service';
 
@@ -17,6 +15,8 @@ import { Router } from '@angular/router';
 })
 export class SignInComponent implements OnInit {
   salvando: boolean = false;
+  errorcadastro: boolean = false;
+  error: any;
   form: FormGroup;
   pwdPattern = "^(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z])(?=.*[A-Z]).{8,}$";
   usePattern = "^[-\w\.\$@\*\!]{8,30}$";
@@ -30,7 +30,6 @@ export class SignInComponent implements OnInit {
   constructor(
     public userService: UserService,
     public authService: AuthService,
-    public dialog: MatDialog,
     public router: Router
   ) { }
 
@@ -54,8 +53,17 @@ export class SignInComponent implements OnInit {
       '';
   }
 
+  getFormControlClass(isValid: boolean, isPristine: boolean): {} {
+    return {
+      'form-control': true,
+      'is-invalid': !isValid && !isPristine,
+      'is-valid': isValid && !isPristine
+    };
+  }
+
   onSubmit(): void {
     this.salvando = true;
+    this.errorcadastro = false;
 
     this.authService.createAuthUser({ email: this.email.value, password: this.senha.value })
       .then((authUser: firebase.User) => {
@@ -70,19 +78,23 @@ export class SignInComponent implements OnInit {
             this.router.navigateByUrl("/home")
           })
           .catch((error: any) => {
-            this.openDialog(`Erro ao salvar os dados do usuário. Erro: ${error}`);
+            this.salvando = false;
+            this.errorcadastro = true;
+            this.error = error
           })
 
       })
       .catch((error: any) => {
-        this.openDialog(`Erro ao salvar os dados do usuário. Erro: ${error}`);
+        this.salvando = false;
+        this.errorcadastro = true;
+        this.error = error
       })
   }
 
   openDialog(msgm: string): void {
-    let dialogRef = this.dialog.open(DialogComponent, {
-      data: msgm
-    });
+    // let dialogRef = this.dialog.open(DialogComponent, {
+    //   data: msgm
+    // });
   }
 
 }

@@ -12,6 +12,7 @@ import { User } from '../model/user';
 })
 export class NavbarComponent implements OnInit {
   user: User = null;
+  nome: string = "";
   constructor(
     public authServ: AuthService,
     public userServ: UserService,
@@ -24,6 +25,7 @@ export class NavbarComponent implements OnInit {
     .subscribe((user: User)=>{
       console.log(user);
       this.user = user;
+      this.nome = user.name;
     })
     
   }

@@ -1,7 +1,6 @@
 import { Http, HttpModule } from '@angular/http';
 import { AuthService } from './services/auth/auth.service';
 import { environment } from './../environments/environment';
-import { MaterialModule } from './material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,7 +13,6 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { HomeComponent } from './pages/home/home.component';
-import { DialogComponent } from './dialog/dialog.component';
 import { UserService } from './services/user/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -26,14 +24,12 @@ import { NavbarComponent } from './navbar/navbar.component';
     SignUpComponent,
     SignInComponent,
     HomeComponent,
-    DialogComponent,
     NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -46,9 +42,6 @@ import { NavbarComponent } from './navbar/navbar.component';
     AuthService,
     UserService
   ],
-  bootstrap: [AppComponent],
-  entryComponents: [
-    DialogComponent
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

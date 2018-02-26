@@ -1,40 +1,38 @@
 <form (ngSubmit)="onSubmit(); $event.preventDefault()">
-  <div class="main-div">
-    <mat-card class="login-card z-depth center">
-      <mat-card-header>
-        <mat-card-title>UBPConfig 2.0 - Login</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
+  <div class="container center">
+    <div class="card">
+      <div class="card-body">
+        <!-- TÍTULO -->
+        <h5 class="card-title text-center"> UBPConfig 2.0 - Login</h5>
 
-        <mat-form-field class="input">
-          <input matInput placeholder="E-mail" [formControl]="email" required>
-          <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
-        </mat-form-field>
-        <br/>
-        <mat-form-field class="input">
-          <input matInput placeholder="Senha" type="password" required [formControl]="senha">
-          <mat-error *ngIf="senha.invalid">{{getPasswordErrorMessage()}}</mat-error>
-        </mat-form-field>
-        <br/>
-        <br/>
-        <div>
-            <button mat-raised-button color="primary" [disabled]="(email.invalid || senha.invalid) || logando" >Logar</button>
-            <mat-spinner class="spinner" diameter="25" *ngIf="logando"></mat-spinner>
-        </div>        
-        <div>
-            <p *ngIf="errologin"><i class="material-icons">error</i>Ocorreu um erro ao logar, tente novamente!</p>
+        <!-- CAMPO E-MAIL -->
+        <div class="form-group">
+          <input [ngClass]="getFormControlClass(email.valid, email.pristine)" placeholder="E-mail" [formControl]="email" required>
+          <div class="invalid-feedback" [hidden]="email.valid || email.pristine">{{getEmailErrorMessage()}}</div>
         </div>
 
+        <!-- CAMPO SENHA -->
+        <div class="form-group">
+          <input [ngClass]="getFormControlClass(senha.valid, senha.pristine)" placeholder="Senha" type="password" required [formControl]="senha">
+          <div class="invalid-feedback" [hidden]="senha.valid || senha.pristine">O campo senha é obrigatório!</div>
+        </div>
+
+        <!-- BOTÃO SUBMIT -->
+        <button type="submit" class="btn btn-primary btn-block" [disabled]="(email.invalid || senha.invalid) || logando">Logar
+          <i *ngIf="logando" class="fa fa-circle-o-notch fa-spin" style="font-size:15px"></i>
+        </button>
+
         <br/>
-        <br/>       
+        <!-- TRATAMENTO DE AO OCORRER ERRO AO LOGAR -->
+        <div class="alert alert-danger" role="alert" *ngIf="errologin">
+          {{error}}
+        </div>
 
-
-        <hr class="centerlink" />
-        <p class="centerlink">
+        <p class="text-center">
           Não possui conta? Cadastre-se clicando
           <a routerLink="signin">Aqui</a>
         </p>
-      </mat-card-content>
-    </mat-card>
+      </div>
+    </div>
   </div>
 </form>

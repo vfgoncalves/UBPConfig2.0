@@ -1,27 +1,5 @@
-.login-card {
-	max-width: 450px;
-}
-
 .center{
 	width: 75%;
 	margin: 10px auto;
-}
-  
-.main-div{
-	height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.input {
-  width: 100%;
-}
-
-.spinner {
-	float:right; 
-	margin: 0;
-	padding: 0;
-	
-  }
-
+	max-width: 500px;
+} 
