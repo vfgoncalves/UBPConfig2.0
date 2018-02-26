@@ -1,0 +1,37 @@
+<app-navbar></app-navbar>
+<form (ngSubmit)="onSubmit(); $event.preventDefault()">
+  <div class="container centerform">
+    <div class="form-group">
+      <label for="sigla">Sigla:</label>
+      <input type="text" id="sigla" [ngClass]="getFormControlClass(sigla.valid, sigla.pristine)" placeholder="Sigla" [formControl]="sigla"
+        required />
+      <div class="invalid-feedback" [hidden]="sigla.valid || sigla.pristine">O campo Sigla é obrigatório!</div>
+    </div>
+
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" [ngClass]="getFormControlClass(nome.valid, nome.pristine)" placeholder="Nome" [formControl]="nome"
+        required />
+      <div class="invalid-feedback" [hidden]="nome.valid || nome.pristine">O campo Nome é obrigatório!</div>
+    </div>
+
+    <div class="form-group">
+      <label for="descricao">Descrição:</label>
+      <textarea id="descricao" [ngClass]="getFormControlClass(descricao.valid, descricao.pristine)" placeholder="Descrição" [formControl]="descricao"
+        required></textarea>
+      <div class="invalid-feedback" [hidden]="descricao.valid || descricao.pristine">O campo Descrição é obrigatório!</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="(sigla.invalid || nome.invalid || descricao.invalid) || salvando">Cadastrar
+      <i *ngIf="salvando" class="fa fa-circle-o-notch fa-spin" style="font-size:15px"></i>
+    </button>
+
+    <br/>
+    <div *ngIf="sucesso" class="alert alert-success" role="alert">
+      Empresa cadastrada com sucesso!
+    </div>
+    <div *ngIf="erro" class="alert alert-danger" role="alert">
+      Erro ao cadastrar a empresa, tente novamente!
+    </div>
+  </div>
+</form>

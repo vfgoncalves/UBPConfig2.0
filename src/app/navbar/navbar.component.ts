@@ -23,9 +23,10 @@ export class NavbarComponent implements OnInit {
     this.userServ.getCurrentUser()
     .valueChanges()
     .subscribe((user: User)=>{
-      console.log(user);
       this.user = user;
-      this.nome = user.name;
+      if (user !== null){
+        this.nome = user.name;
+      }      
     })
     
   }

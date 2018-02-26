@@ -1,3 +1,4 @@
+import { EmpresaService } from './services/empresa/empresa.service';
 import { Http, HttpModule } from '@angular/http';
 import { AuthService } from './services/auth/auth.service';
 import { environment } from './../environments/environment';
@@ -16,6 +17,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { UserService } from './services/user/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
+import { CadastroEmpresaComponent } from './pages/cadastro-empresa/cadastro-empresa.component';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     SignUpComponent,
     SignInComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    CadastroEmpresaComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { NavbarComponent } from './navbar/navbar.component';
   ],
   providers: [
     AuthService,
-    UserService
+    UserService,
+    EmpresaService
   ],
   bootstrap: [AppComponent]
 })
