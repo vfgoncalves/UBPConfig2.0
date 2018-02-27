@@ -3,8 +3,7 @@ export class Sistema {
 
     constructor(
         public nome: string,
-        public descrição: string,
-        public empresa: string,
+        public descricao: string,
         public id: string
     ) {}
 }

@@ -1,5 +1,4 @@
 import { SistemaService } from './services/sistema/sistema.service';
-import { EmpresaService } from './services/empresa/empresa.service';
 import { Http, HttpModule } from '@angular/http';
 import { AuthService } from './services/auth/auth.service';
 import { environment } from './../environments/environment';
@@ -18,7 +17,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { UserService } from './services/user/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
-import { CadastroEmpresaComponent } from './pages/cadastro-empresa/cadastro-empresa.component';
 import { CadastroSistemaComponent } from './pages/cadastro-sistema/cadastro-sistema.component';
 
 
@@ -29,7 +27,6 @@ import { CadastroSistemaComponent } from './pages/cadastro-sistema/cadastro-sist
     SignInComponent,
     HomeComponent,
     NavbarComponent,
-    CadastroEmpresaComponent,
     CadastroSistemaComponent
   ],
   imports: [
@@ -47,7 +44,6 @@ import { CadastroSistemaComponent } from './pages/cadastro-sistema/cadastro-sist
   providers: [
     AuthService,
     UserService,
-    EmpresaService,
     SistemaService
   ],
   bootstrap: [AppComponent]

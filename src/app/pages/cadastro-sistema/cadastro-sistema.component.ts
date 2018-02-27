@@ -1,7 +1,5 @@
 import { Sistema } from './../../model/sistema';
-import { Empresa } from './../../model/empresa';
 import { Observable } from 'rxjs';
-import { EmpresaService } from './../../services/empresa/empresa.service';
 import { FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SistemaService } from '../../services/sistema/sistema.service';
@@ -15,21 +13,18 @@ export class CadastroSistemaComponent implements OnInit {
   salvando: boolean = false;
   sucesso: boolean = false;
   erro: boolean = false;
-  emps: Observable<Empresa[]>;
   sistema: Sistema = null;
 
 
   nome = new FormControl('', [Validators.required]);
   descricao = new FormControl('', [Validators.required]);
-  empresa = new FormControl('', [Validators.required]);
 
   constructor(
-    public sisService: SistemaService,
-    public empService: EmpresaService
+    public sisService: SistemaService
   ) { }
 
   ngOnInit() {
-    this.emps = this.empService.getAll().valueChanges();
+    
   }
 
   getFormControlClass(isValid: boolean, isPristine: boolean): {} {
@@ -52,7 +47,7 @@ export class CadastroSistemaComponent implements OnInit {
     this.salvando = true;
     this.sucesso = false;
     this.erro = false;
-    this.sistema = new Sistema(this.nome.value, this.descricao.value, this.empresa.value, null);
+    this.sistema = new Sistema(this.nome.value, this.descricao.value, null);
     this.sisService.create(this.sistema).then(() => {
       this.salvando = false;
       this.sucesso = true;

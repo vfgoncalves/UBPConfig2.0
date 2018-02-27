@@ -1,5 +1,5 @@
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Sistema } from './../../model/sistema';
 import { Injectable } from '@angular/core';
 import { BaseService } from '../base/base.service';
@@ -29,7 +29,7 @@ export class SistemaService extends BaseService {
   create(sis: Sistema): Promise<void> {
     let id = this.createPushId();
     sis.id = id;
-    return this.db.object(`/sistema/${this.uuid}/${sis.empresa}/${id}`)            
+    return this.db.object(`/sistema/${this.uuid}/${id}`)            
       .set(sis)
       .catch(this.handlePromiseError);
   }
@@ -37,4 +37,8 @@ export class SistemaService extends BaseService {
   createPushId():string{
     return this.db.createPushId()
   }  
+
+  getAll():AngularFireList<Sistema>{
+    return this.db.list(`/sistema/${this.uuid}`)
+  }
 }
