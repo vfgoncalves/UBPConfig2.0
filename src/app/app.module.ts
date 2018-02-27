@@ -1,3 +1,4 @@
+import { ClienteService } from './services/cliente/cliente.service';
 import { SistemaService } from './services/sistema/sistema.service';
 import { Http, HttpModule } from '@angular/http';
 import { AuthService } from './services/auth/auth.service';
@@ -18,6 +19,7 @@ import { UserService } from './services/user/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CadastroSistemaComponent } from './pages/cadastro-sistema/cadastro-sistema.component';
+import { CadastroClienteComponent } from './pages/cadastro-cliente/cadastro-cliente.component';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { CadastroSistemaComponent } from './pages/cadastro-sistema/cadastro-sist
     SignInComponent,
     HomeComponent,
     NavbarComponent,
-    CadastroSistemaComponent
+    CadastroSistemaComponent,
+    CadastroClienteComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { CadastroSistemaComponent } from './pages/cadastro-sistema/cadastro-sist
   providers: [
     AuthService,
     UserService,
-    SistemaService
+    SistemaService,
+    ClienteService
   ],
   bootstrap: [AppComponent]
 })

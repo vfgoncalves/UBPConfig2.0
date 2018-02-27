@@ -1,3 +1,4 @@
+import { CadastroClienteComponent } from './pages/cadastro-cliente/cadastro-cliente.component';
 import { CadastroSistemaComponent } from './pages/cadastro-sistema/cadastro-sistema.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NgModule } from '@angular/core';
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'cadastro-sistema',
     component: CadastroSistemaComponent
+  },
+  {
+    path: 'cadastro-cliente',
+    component: CadastroClienteComponent
   }    
 ];
 
