@@ -68,7 +68,7 @@ export class SignInComponent implements OnInit {
     this.authService.createAuthUser({ email: this.email.value, password: this.senha.value })
       .then((authUser: firebase.User) => {
         let uuid: string = authUser.uid;
-        let user: User = new User(this.nome.value, this.usuario.value, this.email.value);
+        let user: User = new User(this.nome.value, this.usuario.value, this.email.value, null);
 
         //Grava dados do usuário no banco
         this.userService.create(user, uuid)

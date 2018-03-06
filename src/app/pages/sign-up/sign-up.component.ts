@@ -1,8 +1,10 @@
+import { UserService } from './../../services/user/user.service';
 import { AuthService } from './../../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
+import { User } from '../../model/user';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,6 +21,7 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
+    public userService: UserService,
     public router: Router,
   ) { }
 
@@ -56,5 +59,14 @@ export class SignUpComponent implements OnInit {
       'is-invalid': !isValid && !isPristine,
       'is-valid': isValid && !isPristine
     };
+  }
+
+  loginUser() {
+    this.authService.loginWithGoogle().then(data => {
+      let user: User = new User(data["user"]["displayName"], data["user"]["email"], data["user"]["email"],data["user"]["photoURL"]);      
+      this.userService.create(user, data["user"]["G"]).then(r => {        
+        this.router.navigateByUrl("/home")
+      })
+    })
   }
 }

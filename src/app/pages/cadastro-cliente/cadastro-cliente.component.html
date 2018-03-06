@@ -1,7 +1,7 @@
-<app-navbar></app-navbar>
+<!-- <app-navbar></app-navbar>
 <form (ngSubmit)="onSubmit(); $event.preventDefault()">
   <div class="container centerform">
-    <!-- NOME CLIENTE -->
+    
     <div class="form-group">
       <label for="nome">Nome:</label>
       <input type="text" id="nome" [ngClass]="getFormControlClass(nome.valid, nome.pristine)" placeholder="Nome" [formControl]="nome"
@@ -9,7 +9,7 @@
       <div class="invalid-feedback" [hidden]="nome.valid || nome.pristine">O campo Nome é obrigatório!</div>
     </div>
 
-    <!-- EMAIL CLIENTE -->
+    
     <div class="form-group">
       <label for="email">E-mail:</label>
       <input id="email" type="email" [ngClass]="getFormControlClass(email.valid, email.pristine)" placeholder="E-mail" [formControl]="email"
@@ -17,7 +17,7 @@
       <div class="invalid-feedback" [hidden]="email.valid || email.pristine">O campo E-mail é obrigatório!</div>
     </div>
 
-    <!-- SISTEMAS DO CLIENTE -->
+    
 
     <button type="submit" class="btn btn-primary btn-block" [disabled]="(nome.invalid || descricao.invalid) || salvando">Cadastrar
       <i *ngIf="salvando" class="fa fa-circle-o-notch fa-spin" style="font-size:15px"></i>
@@ -31,4 +31,4 @@
       Erro ao cadastrar o sistema, tente novamente!
     </div>
   </div>
-</form>
+</form> -->

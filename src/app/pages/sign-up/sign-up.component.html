@@ -2,28 +2,35 @@
   <div class="container center">
     <div class="card">
       <div class="card-body">
-        <!-- TÍTULO -->
+
         <h5 class="card-title text-center"> UBPConfig 2.0 - Login</h5>
 
-        <!-- CAMPO E-MAIL -->
+
         <div class="form-group">
-          <input [ngClass]="getFormControlClass(email.valid, email.pristine)" placeholder="E-mail" [formControl]="email" required>
+          <input [ngClass]="getFormControlClass(email.valid, email.pristine)" placeholder="E-mail" [formControl]="email" id="email"
+            required>
+
           <div class="invalid-feedback" [hidden]="email.valid || email.pristine">{{getEmailErrorMessage()}}</div>
         </div>
 
-        <!-- CAMPO SENHA -->
+
         <div class="form-group">
-          <input [ngClass]="getFormControlClass(senha.valid, senha.pristine)" placeholder="Senha" type="password" required [formControl]="senha">
+          <input [ngClass]="getFormControlClass(senha.valid, senha.pristine)" placeholder="Senha" type="password" required [formControl]="senha"
+            id="senha">
           <div class="invalid-feedback" [hidden]="senha.valid || senha.pristine">O campo senha é obrigatório!</div>
         </div>
 
-        <!-- BOTÃO SUBMIT -->
+
         <button type="submit" class="btn btn-primary btn-block" [disabled]="(email.invalid || senha.invalid) || logando">Logar
           <i *ngIf="logando" class="fa fa-circle-o-notch fa-spin" style="font-size:15px"></i>
         </button>
+        
+        <button class="btn btn-danger btn-block" (click)="loginUser()">
+          Login with Google
+        </button>
 
         <br/>
-        <!-- TRATAMENTO DE AO OCORRER ERRO AO LOGAR -->
+
         <div class="alert alert-danger" role="alert" *ngIf="errologin">
           {{error}}
         </div>

@@ -14,11 +14,11 @@ export class UserService extends BaseService {
   users: Observable<User[]>;
   currentUser: AngularFireObject<User>;
   userLogged: User;
-  uuid: string;  
+  uuid: string; 
 
   constructor(
     public afAuth: AngularFireAuth,
-    public db: AngularFireDatabase,
+    public db: AngularFireDatabase
   ) {
     super();
     this.listenAuthState();
@@ -70,6 +70,10 @@ export class UserService extends BaseService {
 
   getCurrentUser(): AngularFireObject<User>{
     return this.get(this.uuid);
+  }
+
+  getUser(): AngularFireObject<User> {
+    return this.db.object<User>(`/users/${this.uuid}`);
   }
 
 }
